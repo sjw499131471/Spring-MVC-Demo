@@ -9,5 +9,6 @@
 <body>
     <a href="download?filename=linux常用指令.txt">下载</a>
     <a href="download2?filename=linux常用指令.txt">下载2</a>
+    <img src="/getImage" alt="">
 </body>
 </html>

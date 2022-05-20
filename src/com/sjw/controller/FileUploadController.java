@@ -14,16 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -165,5 +163,23 @@ public class FileUploadController {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @GetMapping("/getImage")
+    public void getImage(HttpServletResponse resp){
+        InputStream in = null;
+        try {
+            in = new FileInputStream(new File("C:\\resource\\46944d83cd1011ec954800ffd5722578\\e22251bbd80711ec87cc00ffd5722578.png"));
+
+            resp.setContentType(MediaType.IMAGE_PNG_VALUE);
+            OutputStream os = resp.getOutputStream();
+            IOUtils.copy(in, os);
+            in.close();
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
